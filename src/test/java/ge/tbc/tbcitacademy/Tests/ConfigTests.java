@@ -2,10 +2,13 @@ package ge.tbc.tbcitacademy.Tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
+import ge.tbc.tbcitacademy.POM.Listeners.CustomTestListener;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 
+@Listeners({CustomTestListener.class})
 public class ConfigTests {
     @BeforeSuite
     public void initialSetup(){

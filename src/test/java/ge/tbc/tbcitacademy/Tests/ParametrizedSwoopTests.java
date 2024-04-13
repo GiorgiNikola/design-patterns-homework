@@ -2,18 +2,22 @@ package ge.tbc.tbcitacademy.Tests;
 
 import ge.tbc.tbcitacademy.POM.Data.Constants;
 import ge.tbc.tbcitacademy.POM.DataProvider.CustomDataProvider;
+import ge.tbc.tbcitacademy.POM.Listeners.CustomTestListener;
 import ge.tbc.tbcitacademy.POM.Pages.SwoopPages.BasketPage;
 import ge.tbc.tbcitacademy.POM.Steps.SwoopSteps.HeaderSteps;
 import ge.tbc.tbcitacademy.POM.Steps.SwoopSteps.OfferSteps;
 import ge.tbc.tbcitacademy.POM.Steps.SwoopSteps.SportsSteps;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.closeWindow;
 import static com.codeborne.selenide.Selenide.open;
 
+@Epic("Sports Offers")
 public class ParametrizedSwoopTests extends ConfigTests{
     HeaderSteps headerSteps = new HeaderSteps();
     SportsSteps sportsSteps = new SportsSteps();
@@ -24,7 +28,11 @@ public class ParametrizedSwoopTests extends ConfigTests{
         open(Constants.swoopLink);
     }
 
-    @Test(dataProvider = "offersDataProvider", dataProviderClass = CustomDataProvider.class)
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Sale Price Validation")
+    @Story("Verify sale price calculation")
+    @Test(dataProvider = "offersDataProvider", dataProviderClass = CustomDataProvider.class,
+    description = "Go to sport section and check offer price is correct")
     public void checkSaleValuesTest(String offerName, int originalPrice, int discount){
         headerSteps
                 .goToSportSection();
@@ -33,7 +41,11 @@ public class ParametrizedSwoopTests extends ConfigTests{
         Assert.assertEquals(actualPrice, originalPrice - discount);
     }
 
-    @Test(dataProvider = "offerNamesDataProvider", dataProviderClass = CustomDataProvider.class)
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Shopping Cart Management")
+    @Story("Add offer to cart and validate cart contents")
+    @Test(dataProvider = "offerNamesDataProvider", dataProviderClass = CustomDataProvider.class,
+    description = "Validate offer is added to cart correctly")
     public void validateCartBehavior(String offerName){
         headerSteps
                 .goToSportSection();

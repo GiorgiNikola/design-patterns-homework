@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import ge.tbc.tbcitacademy.POM.Data.Constants;
 import ge.tbc.tbcitacademy.POM.Pages.TelerikPages.OrderPage;
 import ge.tbc.tbcitacademy.POM.Util.HelperFunctions;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.partialText;
 import static com.codeborne.selenide.Condition.text;
@@ -15,21 +16,25 @@ import static com.codeborne.selenide.Selenide.$$x;
 public class OrderSteps {
     OrderPage orderPage = new OrderPage();
 
+    @Step("dismiss login popup")
     public OrderSteps dismissLogin(){
         orderPage.dismissBtn.click();
         return this;
     }
 
+    @Step("validate unit price")
     public boolean validateUnitPrice(){
         return orderPage.priceElement.getText().equals(HelperFunctions.formatCurrency(Constants.unitPrice));
     }
 
+    @Step("increase term property")
     public OrderSteps increaseTheTerm(){
         orderPage.dropDown.click();
         orderPage.options.filter(Condition.innerText(Constants.oneYearTxt)).get(0).click();
         return this;
     }
 
+    @Step("validate price after increasing term")
     public OrderSteps validateTermIncreasedPrice(){
         double subTotalPrice =
                 Constants.unitPrice + HelperFunctions.calculatePercentage(Constants.maintenancePrice, Constants.unitPricePercent);
@@ -37,11 +42,13 @@ public class OrderSteps {
         return this;
     }
 
+    @Step("increase quantity")
     public OrderSteps increaseQuantity(){
         orderPage.quantityDropDown.click();
         return this;
     }
 
+    @Step("validate price after increasing quantity")
     public OrderSteps validateQuantityIncreasedPrice(){
         orderPage.options.filter(Condition.innerText("2")).get(0).click();
         double subTotalPrice = HelperFunctions.calculatePercentage(Constants.unitPrice * 2, Constants.unitPricePercent)
@@ -50,6 +57,7 @@ public class OrderSteps {
         return this;
     }
 
+    @Step("validate discounts is correct")
     public OrderSteps validateTotalDiscounts(){
         orderPage.questionMark.hover();
         double licenceDiscountPrice = HelperFunctions
@@ -64,6 +72,7 @@ public class OrderSteps {
         return this;
     }
 
+    @Step("validate total value")
     public OrderSteps validateTotalValue(){
         double totalValue = Constants.unitPrice * 2
                 + Constants.maintenancePrice * 2
@@ -72,6 +81,7 @@ public class OrderSteps {
         return this;
     }
 
+    @Step("continue as guest")
     public OrderSteps continueAsGuest(){
         orderPage.continueAsGuest.click();
         return this;
