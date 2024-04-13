@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="AllTestSuite" >
+    <test name="Parameter Test">
+        <parameter name="firstName" value="John"/>
+        <parameter name="lastName" value="Doe"/>
+        <parameter name="gender" value="Male"/>
+        <parameter name="mobileNumber" value="1234567890"/>
+        <classes>
+            <class name="ge.tbc.tbcitacademy.Tests.AlternativeParametrizations"/>
+        </classes>
+    </test>
+
+    <test name="Parameter Test 2">
+        <parameter name="firstName" value="Jane"/>
+        <parameter name="lastName" value="Smith"/>
+        <parameter name="gender" value="Female"/>
+        <parameter name="mobileNumber" value="9876543210"/>
+        <classes>
+            <class name="ge.tbc.tbcitacademy.Tests.AlternativeParametrizations"/>
+        </classes>
+    </test>
+
+    <test name="Parameter Test 3">
+        <parameter name="firstName" value="Bob"/>
+        <parameter name="lastName" value="Johnson"/>
+        <parameter name="gender" value="Other"/>
+        <parameter name="mobileNumber" value="5555555555"/>
+        <classes>
+            <class name="ge.tbc.tbcitacademy.Tests.AlternativeParametrizations"/>
+        </classes>
+    </test>
+</suite>
+
