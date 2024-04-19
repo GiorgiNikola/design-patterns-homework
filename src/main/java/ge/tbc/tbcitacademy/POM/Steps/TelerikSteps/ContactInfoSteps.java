@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ge.tbc.tbcitacademy.POM.Data.Constants;
 import ge.tbc.tbcitacademy.POM.Pages.TelerikPages.ContactInfoPage;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class ContactInfoSteps {
     ContactInfoPage contactInfoPage = new ContactInfoPage();
 
+    @Step("Fill the contact information form")
     public ContactInfoSteps fillTheForm(){
         contactInfoPage.firstName.sendKeys(Constants.fullName);
         contactInfoPage.lastName.sendKeys(Constants.lastName);
@@ -25,11 +27,13 @@ public class ContactInfoSteps {
         return this;
     }
 
+    @Step("Click 'Go Back' button")
     public ContactInfoSteps clickGoBackButton(){
         contactInfoPage.backBtn.click();
         return this;
     }
 
+    @Step("Validate the contact information is still present")
     public ContactInfoSteps validateInfoIsStillPresent(){
         contactInfoPage.firstName.shouldHave(Condition.value(Constants.fullName));
         contactInfoPage.lastName.shouldHave(Condition.value(Constants.lastName));
